@@ -7,6 +7,11 @@ services:
     # SQLite 只能單一程序寫入，所以只開 1 個 worker，用多執行緒處理同時連線
     startCommand: gunicorn app:app --workers 1 --threads 4 --timeout 60 --bind 0.0.0.0:$PORT
     healthCheckPath: /api/health
+    # 只改說明文件或截圖時不重新部署（重新部署會清空 SQLite 資料）
+    buildFilter:
+      ignoredPaths:
+        - README.md
+        - docs/**
     envVars:
       - key: PYTHON_VERSION
         value: 3.12.7
