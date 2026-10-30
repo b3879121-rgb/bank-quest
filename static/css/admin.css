@@ -1,0 +1,40 @@
+:root{--bg:#f4f1ea;--card:#fff;--fg:#2a2118;--mut:#6f6455;--line:#ddd3c2;--pri:#7a4a28;--ok:#2d7a3e;--bad:#b3261e;--warn:#a8680f}
+@media (prefers-color-scheme:dark){:root{--bg:#1b1511;--card:#251d17;--fg:#f1e7d3;--mut:#b5a78f;--line:#3d3228;--pri:#d9a65f;--ok:#6fcf86;--bad:#ff7b6b;--warn:#f0b35a}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.6 "Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif}
+header{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between;padding:14px 20px;background:var(--card);border-bottom:1px solid var(--line)}
+h1{font-size:1.2rem;margin:0}h2{font-size:1.05rem;margin:0}
+nav{display:flex;gap:14px;align-items:center}nav form{margin:0}
+a{color:var(--pri)}
+main{max-width:1100px;margin:0 auto;padding:20px}
+section{margin-bottom:28px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+.card b{display:block;font-size:1.7rem;line-height:1.2;font-variant-numeric:tabular-nums}
+.card span{color:var(--mut);font-size:.85rem}
+.funnel{display:grid;gap:8px;margin-top:10px}
+.frow{display:grid;grid-template-columns:minmax(150px,260px) 1fr 56px;gap:10px;align-items:center}
+.frow i{display:block;height:14px;background:var(--line);border-radius:3px;overflow:hidden}
+.frow i s{display:block;height:100%;background:var(--pri)}
+.frow em{font-style:normal;text-align:right;font-variant-numeric:tabular-nums}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:10px}
+.bar h2{margin-right:auto}
+input,select,button,textarea{font:inherit;color:var(--fg);background:var(--card);border:1px solid var(--line);border-radius:6px;padding:6px 10px}
+button{cursor:pointer}button:hover{border-color:var(--pri)}
+button.primary{background:var(--pri);color:#fff;border-color:var(--pri)}
+button.danger{color:var(--bad)}
+.scroll{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:8px}
+table{width:100%;border-collapse:collapse;min-width:760px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-size:.82rem;color:var(--mut);font-weight:600;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td.num{font-variant-numeric:tabular-nums}
+.pill{display:inline-block;padding:0 8px;border-radius:99px;font-size:.8rem;border:1px solid var(--line)}
+.pill.ok{color:var(--ok);border-color:var(--ok)}.pill.bad{color:var(--bad);border-color:var(--bad)}
+.dots{display:inline-flex;flex-wrap:wrap;max-width:190px;gap:3px;vertical-align:middle}.dots i{width:10px;height:10px;border-radius:50%;background:var(--line)}.dots i.on{background:var(--ok)}
+.acts{display:flex;gap:6px;flex-wrap:wrap}.acts button{padding:2px 8px;font-size:.85rem}
+.mut{color:var(--mut)}.small{font-size:.82rem}.err{color:var(--bad)}
+.chk{display:flex;gap:6px;align-items:center}
+.login{display:grid;place-items:center;min-height:100vh;padding:16px}
+.box{width:100%;max-width:360px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:24px;display:grid;gap:10px}
+.box h1{font-size:1.3rem}.box p{margin:0}

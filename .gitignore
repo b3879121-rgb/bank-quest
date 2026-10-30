@@ -1,0 +1,16 @@
+# 虛擬環境與快取
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# 資料庫（啟動時會自動建立，不上傳）
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+
+# 本機設定與系統檔
+.env
+.DS_Store
+Thumbs.db

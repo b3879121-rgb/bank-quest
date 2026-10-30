@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>幸福銀行 金融任務</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;900&display=swap">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/game.css') }}">
+<style>[hidden]{display:none!important}html,body{margin:0}</style>
+</head>
+<body>
+<main id="app">
+ <div id="wrap">
+  <div id="stage">
+   <canvas id="cv"></canvas>
+   <div id="hud">
+    <button id="med" type="button" aria-label="開啟任務清單"><small>任務</small><b id="mc">0/5</b></button>
+    <button id="mapb" hidden type="button" aria-label="開啟闖關地圖（快捷鍵 G）">地圖</button>
+    <div id="locn">幸福鎮・中央廣場</div>
+    <div id="clkw"><svg id="clk" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#f7efd9" stroke="#b88a3e" stroke-width="6"/><circle cx="50" cy="50" r="40" fill="none" stroke="#d8c79c" stroke-width="1"/><g id="tk" stroke="#5b371d" stroke-width="2.2"></g><line id="hh" x1="50" y1="50" x2="50" y2="29" stroke="#2b1b0e" stroke-width="5" stroke-linecap="round"/><line id="mh" x1="50" y1="50" x2="50" y2="17" stroke="#8a2f22" stroke-width="3.5" stroke-linecap="round"/><circle cx="50" cy="50" r="4.5" fill="#b88a3e"/></svg><span id="dig">09:00</span></div>
+   </div>
+   <div id="toast" hidden></div>
+   <div id="title">
+    <small>金融知識 RPG</small>
+    <h1>幸福銀行<br>金融任務</h1>
+    <p>走進銀行，和櫃台人員對話。闖過 5 個章節、25 個金融任務，識破各種「高報酬」與詐騙陷阱。</p>
+    <div class="nameset"><label for="pname">你的名稱</label><input id="pname" type="text" maxlength="12" autocomplete="nickname" placeholder="輸入名稱（最多 12 字）"><span id="perr" role="alert"></span></div>
+    <button class="btn" id="start" type="button">開始冒險</button>
+    <p style="font-size:max(10px,1.4cqw);opacity:.8">方向鍵／WASD 移動　Z・Enter・空白鍵 互動　M 任務清單</p>
+   </div>
+   <section id="story" class="page" hidden aria-label="前情提要">
+    <div class="pg-top"><small id="st-no"></small><button class="pgb ghost" id="st-skip" type="button">略過</button></div>
+    <div id="st-art" class="st-art" aria-hidden="true"></div>
+    <p id="st-tx" class="st-tx" aria-live="polite"></p>
+    <div class="pg-bot"><span id="st-dots" aria-hidden="true"></span><button class="pgb" id="st-next" type="button">下一頁</button></div>
+   </section>
+   <section id="chmap" class="page" hidden aria-label="章節選擇">
+    <div class="pg-top"><div><small>冒險路線</small><b id="cs-prog"></b></div><button class="pgb ghost" id="cs-back" type="button" hidden>回到遊戲</button></div>
+    <div id="cs-list"></div>
+    <div id="gm-info"><div><h3 id="cs-ti"></h3><p id="cs-ds"></p></div><button class="pgb" id="cs-go" type="button">前往</button></div>
+   </section>
+   <section id="gmap" class="page" hidden aria-label="闖關地圖">
+    <div class="pg-top"><div><small>闖關地圖</small><b id="gm-prog"></b></div><div class="pg-btns"><button class="pgb ghost" id="gm-chs" type="button" hidden>章節</button><button class="pgb ghost" id="gm-back" type="button" hidden>回到遊戲</button></div></div>
+    <div id="gm-board"><svg id="gm-path" viewBox="0 0 960 540" preserveAspectRatio="none" aria-hidden="true"></svg><div id="gm-nodes"></div></div>
+    <div id="gm-info"><div><h3 id="gi-t"></h3><p id="gi-d"></p><p id="gi-h"></p></div><button class="pgb" id="gi-go" type="button">出發</button></div>
+   </section>
+   <div id="fade"></div>
+  </div>
+  <div id="dlg" hidden>
+   <div id="ch" hidden></div>
+   <div id="box">
+    <div id="nm"></div>
+    <div id="por"><canvas id="pc" width="220" height="270"></canvas></div>
+    <div id="inner"><div id="tx"></div><i id="nx" hidden>▼</i></div>
+   </div>
+  </div>
+ </div>
+ <div id="pad">
+  <div id="dp">
+   <span></span><button data-k="arrowup" aria-label="上">▲</button><span></span>
+   <button data-k="arrowleft" aria-label="左">◀</button><span></span><button data-k="arrowright" aria-label="右">▶</button>
+   <span></span><button data-k="arrowdown" aria-label="下">▼</button><span></span>
+  </div>
+  <div id="abs"><button class="ab s" id="bm" type="button">任務</button><button class="ab" id="ba" type="button">A</button></div>
+ </div>
+ <p class="keys">方向鍵／WASD 移動，靠近人物或物件按 Z／Enter／空白鍵 互動，M 開任務清單。</p>
+ <p class="note">本遊戲為教育用的虛構情境，人物與公司皆為虛構，內容不是法律意見；條文與數字請以全國法規資料庫、金管會、存保公司最新公告為準。可疑投資請撥 165 反詐騙專線查證。</p>
+</main>
+<div id="ov" hidden><div id="card"></div></div>
+<script src="{{ url_for('static', filename='js/game.js') }}"></script>
+</body>
+</html>

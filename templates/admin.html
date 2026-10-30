@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="csrf" content="{{ csrf }}">
+<title>玩家管理｜幸福銀行 金融任務</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+<body>
+<header>
+  <h1>玩家管理後台</h1>
+  <nav>
+    <a href="/" target="_blank">開啟遊戲</a>
+    <a href="/admin/players.csv">匯出玩家 CSV</a>
+    <form method="post" action="/admin/logout"><button type="submit">登出</button></form>
+  </nav>
+</header>
+<main>
+  <section id="stats" class="cards" aria-label="整體統計"></section>
+
+  <section>
+    <h2>任務完成人數</h2>
+    <div id="funnel" class="funnel"></div>
+  </section>
+
+  <section>
+    <div class="bar">
+      <h2>玩家</h2>
+      <input id="q" type="search" placeholder="搜尋名稱或備註" aria-label="搜尋玩家">
+      <select id="sort" aria-label="排序">
+        <option value="last_seen">最近上線</option>
+        <option value="created">最新加入</option>
+        <option value="name">名稱</option>
+        <option value="plays">遊玩次數</option>
+        <option value="mistakes">答錯次數</option>
+      </select>
+    </div>
+    <div class="scroll">
+      <table id="players">
+        <thead><tr><th>編號</th><th>名稱</th><th>進度</th><th>答錯</th><th>通關</th><th>次數</th><th>最後上線</th><th>備註</th><th>操作</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p id="empty" class="mut" hidden>還沒有玩家。玩家在遊戲首頁輸入名稱、按下「開始冒險」後會出現在這裡。</p>
+  </section>
+
+  <section>
+    <div class="bar">
+      <h2>櫃台自由提問</h2>
+      <label class="chk"><input id="unans" type="checkbox"> 只看知識庫答不出來的</label>
+    </div>
+    <div class="scroll">
+      <table id="qs">
+        <thead><tr><th>時間</th><th>玩家</th><th>問題</th><th>最相近的條目</th><th>分數</th><th>結果</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+</body>
+</html>

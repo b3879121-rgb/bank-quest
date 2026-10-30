@@ -1,0 +1,8 @@
+flask>=3.0
+numpy>=1.26
+# 上線用的正式伺服器（Render 會用它啟動；本機 py app.py 用不到）
+gunicorn>=22.0
+# 只有重新轉換 GF.xlsx（python import_gf.py）時才需要
+openpyxl>=3.1
+# 選用：要用真正的語意向量（和你的 Colab / FAISS 練習同一個模型）就安裝；不裝會自動用雜湊向量備援
+# sentence-transformers>=3.0
