@@ -39,7 +39,8 @@ def llm_answer(question, hits):
     key = os.environ.get("GEMINI_API_KEY")
     if not key:
         return None
-    model = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
+    # 用「-latest」別名，舊型號退役時不用改程式；lite 版回應快（約 1 秒），不會超過 15 秒逾時
+    model = os.environ.get("GEMINI_MODEL", "gemini-flash-lite-latest")
     ctx = "\n".join(f"[{h['ref']}] {h['summary']}" for h in hits)
     prompt = (
         "你是銀行櫃台的林小姐，用親切口語的繁體中文，只根據下面的資料回答，120 字以內。"
